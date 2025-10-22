@@ -54,7 +54,8 @@ bool is_valid_regex(std::string filename)
   bool result= false;
   try
   {
-    std::regex filename_pattern("^[^.][a-zA-Z0-9_][a-zA-Z0-9_]*[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"); 
+    //std::regex filename_pattern("^[^.][a-zA-Z0-9_][a-zA-Z0-9_]*[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"); 
+    std::regex filename_pattern("[a-zA-Z0-9_]+\\.[a-zA-Z]+$"); 
     //std::regex filename_pattern("^[a-zA-Z0-9_.-]+$");
     result= std::regex_match(filename, filename_pattern); 
   }

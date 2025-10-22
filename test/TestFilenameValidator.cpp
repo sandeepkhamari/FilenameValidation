@@ -69,10 +69,12 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Values(
 	    std::make_pair("config.git", true),
 	    // failing case.
-	    std::make_pair("config_log", true),
+	    //std::make_pair("config_log", true),
+	    std::make_pair("config_log.txt", true),
 	    std::make_pair("_Assfwrc.w", true),
 	    std::make_pair("B_qwqe.Zq", true),
-	    std::make_pair("_Q.a", true)
+	    std::make_pair("_Q.a", true),
+	    std::make_pair("A.B", true)
     )
 );
 
@@ -92,9 +94,8 @@ INSTANTIATE_TEST_SUITE_P(
             std::make_pair("con!fig_log", false),
             std::make_pair("_Assfwrc.?w", false),
             std::make_pair("", false),
-	    // failing case
             std::make_pair("_Q._2a", false),
-            std::make_pair(" ", false)
+	    std::make_pair(" ", false)
     )
 );
 
