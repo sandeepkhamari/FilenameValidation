@@ -50,7 +50,8 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Values(
 	   std::make_pair("#myNmae.txt", false),
 	   std::make_pair("sandeep&khamari.txt", false),
-	   std::make_pair("sandeep", false)
+	   std::make_pair("sandeep", false),
+	   std::make_pair(".txt", false)
     )
 );
 
@@ -95,8 +96,7 @@ INSTANTIATE_TEST_SUITE_P(
             std::make_pair("_Assfwrc.?w", false),
             std::make_pair("", false),
             std::make_pair("_Q._2a", false),
-	    std::make_pair(" ", false),
-	    std::make_pair(".txt", false)
+	    std::make_pair(" ", false)
     )
 );
 
