@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "../include/FilenameValidator.hpp"
+#include <regex>
 
 // checks whether a given filename is correct.
 bool is_valid(std::string filename)
@@ -46,4 +47,21 @@ bool is_valid(std::string filename)
    } 
 
    return true;
+}
+
+bool is_valid_regex(std::string filename)
+{
+  bool result= false;
+  try
+  {
+    std::regex filename_pattern("^[^.][a-zA-Z0-9_][a-zA-Z0-9_]*[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"); 
+    //std::regex filename_pattern("^[a-zA-Z0-9_.-]+$");
+    result= std::regex_match(filename, filename_pattern); 
+  }
+  catch(const std::regex_error& e)
+  {
+    std::cerr<<" Regex error: "<<e.what()<<std::endl;
+    return false;
+  }
+  return result;
 }

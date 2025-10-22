@@ -51,7 +51,51 @@ INSTANTIATE_TEST_SUITE_P(
 	   std::make_pair("#myNmae.txt", false),
 	   std::make_pair("sandeep&khamari.txt", false),
 	   std::make_pair("sandeep", false)
-	   )
+    )
+);
+
+
+class TestFilenameValidationCheckWithRegex: public ::testing::TestWithParam<std::pair<std::string, bool>> {};
+
+TEST_P(TestFilenameValidationCheckWithRegex, correctFilenames)
+{
+   auto [name, expected]= GetParam();
+   EXPECT_EQ(is_valid_regex(name), expected);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    CheckFilenameRegexCorrect,
+    TestFilenameValidationCheckWithRegex,
+    ::testing::Values(
+	    std::make_pair("config.git", true),
+	    // failing case.
+	    std::make_pair("config_log", true),
+	    std::make_pair("_Assfwrc.w", true),
+	    std::make_pair("B_qwqe.Zq", true),
+	    std::make_pair("_Q.a", true)
+    )
+);
+
+class TestFilenameValidationCheckWithRegexIncorrect: public ::testing::TestWithParam<std::pair<std::string, bool>> {};
+
+TEST_P(TestFilenameValidationCheckWithRegexIncorrect, incorrectFilenames)
+{
+   auto [name, expected]= GetParam();
+   EXPECT_EQ(is_valid_regex(name), expected);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    CheckFilenameRegexIncorrect,
+    TestFilenameValidationCheckWithRegexIncorrect,
+    ::testing::Values(
+            std::make_pair(".config45.git", false),
+            std::make_pair("con!fig_log", false),
+            std::make_pair("_Assfwrc.?w", false),
+            std::make_pair("", false),
+	    // failing case
+            std::make_pair("_Q._2a", false),
+            std::make_pair(" ", false)
+    )
 );
 
 int main(int argc, char **argv)
